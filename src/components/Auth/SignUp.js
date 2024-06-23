@@ -3,16 +3,19 @@ import { signUp } from "../../services/authService";
 
 const SignUp = () => {
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [disabled, setDisabled] = useState(false);
 
   const handleSignUp = async (e) => {
+    setDisabled(true);
     e.preventDefault();
     try {
-      const data = await signUp(email);
+      await signUp(email);
       alert("Sign up successful. Check your email for login details.");
       window.location.href = "/signin";
     } catch (error) {
       alert(error.response.data.error);
+      setDisabled(false);
+
     }
   };
 
@@ -34,7 +37,8 @@ const SignUp = () => {
         />
         <button
           type="submit"
-          className="w-full p-2 bg-blue-500 text-white rounded"
+          className="w-full p-2 bg-blue-500 text-white rounded disabled:bg-blue-300 disabled:cursor-progress"
+          disabled={disabled}
         >
           Sign Up
         </button>
