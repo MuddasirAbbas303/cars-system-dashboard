@@ -9,7 +9,7 @@ export const getCategories = async (token) => {
         });
         return response.data;
     } catch (error) {
-        return {status: error.response.status};
+        throw error
     }
 };
 
@@ -20,7 +20,7 @@ export const addCategory = async (categoryData, token) => {
         });
         return response.data;
     } catch (error) {
-        return {status: error.response.data.code};
+        throw error;
     }
 };
 

@@ -15,12 +15,13 @@ const CategoryForm = ({ category, setEditCategory, setEditable, isEdit, fetchCat
             setEditable(false);
             alert('Category updated successfully!');
         } else {
-            const response = await addCategory({ name }, token);
-            if (response.status === '23505') {
-                alert('Category already exists!');
-            } else {
+            try {
+                await addCategory({ name }, token);
                 alert('Category added successfully!');
+            } catch (error) {
+                alert(error.response.data)
             }
+
         }
         setName('');
         fetchCategories();
