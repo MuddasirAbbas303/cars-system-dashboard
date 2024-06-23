@@ -35,7 +35,7 @@ const CarForm = ({ car, setEditCar, setEditable, isEdit, fetchCars, page }) => {
         const token = localStorage.getItem('token');
         const carData = formValues;
         if (isEdit) {
-            await updateCar(car.id, carData, token);
+            await updateCar(car._id, carData, token);
             setEditCar(null);
             setEditable(false);
             alert('Car updated successfully!');
@@ -56,10 +56,15 @@ const CarForm = ({ car, setEditCar, setEditable, isEdit, fetchCars, page }) => {
 
     return (
         <form onSubmit={handleSubmit} className="mb-4">
-            <select value={formValues.category_id} onChange={(e) => setFormValues({ ...formValues, category_id: e.target.value })} className="w-full p-2 mb-4 border border-gray-300 rounded" required>
-                <option value="">Select Category</option>
+            <select
+                value={formValues.category_id._id || formValues.category_id}
+                onChange={(e) => setFormValues({ ...formValues, category_id: e.target.value })}
+                className="w-full p-2 mb-4 border border-gray-300 rounded"
+                required
+            >
+                <option value="">{formValues?.category_id ? formValues.category_id.name : "Select Category"}</option>
                 {categories?.map((category) => (
-                    <option key={category.id} value={category.id}>{category.name}</option>
+                    <option key={category._id} value={category._id}>{category.name}</option>
                 ))}
             </select>
             <div className='flex'>

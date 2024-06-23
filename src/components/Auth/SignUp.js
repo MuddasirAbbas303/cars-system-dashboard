@@ -8,8 +8,9 @@ const SignUp = () => {
   const handleSignUp = async (e) => {
     e.preventDefault();
     try {
-      const data = await signUp(email, password);
+      const data = await signUp(email);
       alert("Sign up successful. Check your email for login details.");
+      window.location.href = "/signin";
     } catch (error) {
       alert(error.response.data.error);
     }
@@ -22,19 +23,12 @@ const SignUp = () => {
         className="w-1/3 bg-white p-8 rounded-lg shadow-lg"
       >
         <h2 className="text-2xl mb-6">Sign Up</h2>
+        <h1 className="mb-3">We will send you random password to your email</h1>
         <input
           type="email"
           placeholder="Email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          className="w-full p-2 mb-4 border border-gray-300 rounded"
-          required
-        />
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
           className="w-full p-2 mb-4 border border-gray-300 rounded"
           required
         />

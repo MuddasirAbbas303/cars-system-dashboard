@@ -10,7 +10,7 @@ const CategoryForm = ({ category, setEditCategory, setEditable, isEdit, fetchCat
         e.preventDefault();
         const token = localStorage.getItem('token');
         if (isEdit) {
-            await updateCategory(category.id, { name }, token);
+            await updateCategory(category._id, { name }, token);
             setEditCategory(null);
             setEditable(false);
             alert('Category updated successfully!');

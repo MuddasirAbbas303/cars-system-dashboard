@@ -23,7 +23,7 @@ const CarList = () => {
         if (data.status === 400) {
             navigate('/signin');
         } else {
-            setCars(data.cars);
+            setCars(data?.cars);
             setTotalPages(data.totalPages);
         }
     };
@@ -71,16 +71,16 @@ const CarList = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {cars.map((car) => (
-                        <tr key={car.id}>
-                            <td className="border px-4 py-2">{car.categories.name}</td>
+                    {cars?.map((car) => (
+                        <tr key={car._id}>
+                            <td className="border px-4 py-2">{car.category_id.name}</td>
                             <td className="border px-4 py-2">{car.color}</td>
                             <td className="border px-4 py-2">{car.model}</td>
                             <td className="border px-4 py-2">{car.make}</td>
                             <td className="border px-4 py-2">{car.registration_no}</td>
                             <td className="border px-4 py-2">
                                 <button disabled={editable} onClick={() => { setEditCar(car); setEditable(true) }} className="ml-2 py-2 px-3 bg-yellow-500 text-white rounded disabled:bg-yellow-300 disabled:cursor-not-allowed">Edit</button>
-                                <button disabled={editable} onClick={() => { handleDelete(car.id); setEditable(true) }} className="ml-2 py-2 px-3 bg-red-500 text-white rounded disabled:bg-red-200 disabled:cursor-not-allowed">Delete</button>
+                                <button disabled={editable} onClick={() => { handleDelete(car._id); setEditable(true) }} className="ml-2 py-2 px-3 bg-red-500 text-white rounded disabled:bg-red-200 disabled:cursor-not-allowed">Delete</button>
                             </td>
                         </tr>
                     ))}
